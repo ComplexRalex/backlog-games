@@ -12,9 +12,9 @@ import GameGrid from "../src/app/gameCollection/view/components/GameGrid";
 import GameForm, { GameFormProps } from "../src/app/gameCollection/view/components/GameForm";
 import GameRemoveForm, { GameRemoveFormProps } from "../src/app/gameCollection/view/components/GameRemoveForm";
 import ErrorModal from "../src/app/main/view/components/ErrorModal";
+import GameCardPlaceholder from "../src/app/gameCollection/view/components/GameCardPlaceholder";
 
 import styles from "../styles/Collection.module.css";
-import GameCardPlaceholder from "../src/app/gameCollection/view/components/GameCardPlaceHolder";
 
 type FormProps = Omit<GameFormProps, "onHide">
 type RemoveFormProps = Omit<GameRemoveFormProps, "onHide">

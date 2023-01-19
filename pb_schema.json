@@ -1,17 +1,15 @@
-migrate((db) => {
-  const collection = new Collection({
+[
+  {
     "id": "x4iruaipx6hs5ng",
-    "created": "2023-01-17 19:51:52.046Z",
-    "updated": "2023-01-17 19:51:52.046Z",
     "name": "games",
     "type": "base",
     "system": false,
     "schema": [
       {
-        "system": false,
         "id": "tm7wvcg0",
         "name": "title",
         "type": "text",
+        "system": false,
         "required": false,
         "unique": false,
         "options": {
@@ -21,10 +19,10 @@ migrate((db) => {
         }
       },
       {
-        "system": false,
         "id": "xwjjenre",
         "name": "description",
         "type": "text",
+        "system": false,
         "required": false,
         "unique": false,
         "options": {
@@ -40,12 +38,5 @@ migrate((db) => {
     "updateRule": "",
     "deleteRule": "",
     "options": {}
-  });
-
-  return Dao(db).saveCollection(collection);
-}, (db) => {
-  const dao = new Dao(db);
-  const collection = dao.findCollectionByNameOrId("x4iruaipx6hs5ng");
-
-  return dao.deleteCollection(collection);
-})
+  }
+]
