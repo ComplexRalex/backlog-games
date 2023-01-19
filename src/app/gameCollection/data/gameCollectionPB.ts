@@ -1,5 +1,5 @@
 import { GameInfo, Game, createGame, GameID } from "../domain/game";
-import { createGameCollection, GameCollection } from "../domain/gameCollection";
+import { GameCollection } from "../domain/gameCollection";
 import { GameCollectionRepo } from "../domain/gameCollectionRepo";
 import httpClient from "../../main/request/httpClient";
 

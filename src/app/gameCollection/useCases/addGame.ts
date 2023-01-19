@@ -1,8 +1,8 @@
 import { createGame, GameInfo } from "../domain/game";
-import { addGameToCollection, GameCollection } from "../domain/gameCollection";
-import { UseCaseProps } from "../../main/useCases/types/UseCaseProps";
+import { addGameToCollection } from "../domain/gameCollection";
+import { GameCollectionUseCase } from "./types/GameCollectionUseCase";
 
-export type AddGameProps = UseCaseProps & {
+export type AddGameProps = GameCollectionUseCase & {
     gameInfo: GameInfo;
 };
 

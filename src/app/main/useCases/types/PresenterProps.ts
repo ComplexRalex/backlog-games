@@ -1,5 +1,3 @@
-import { GameCollection } from "../../../gameCollection/domain/gameCollection";
-
-export type PresenterProps = {
-    present(data: GameCollection): void;
+export type PresenterProps<T> = {
+    present(data: T): void;
 }

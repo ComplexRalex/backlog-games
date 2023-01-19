@@ -31,6 +31,7 @@ const GameForm = (props: GameFormProps): JSX.Element => {
                     description: values.description.trim(),
                 });
             } catch (error) {
+                console.log(error);
                 console.log("wtf");
             } finally {
                 setSubmitted(false);
@@ -39,7 +40,7 @@ const GameForm = (props: GameFormProps): JSX.Element => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form>
             <Modal show={props.show} onHide={props.onHide} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{`${!props.isModify ? "Add" : "Modify"} game`}</Modal.Title>

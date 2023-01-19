@@ -1,9 +1,12 @@
 import { createContext, useState, useMemo } from "react";
+
 import { createGameCollection, GameCollection } from "../domain/gameCollection";
 import { addGameUseCase } from "../useCases/addGame";
 import { modifyGameUseCase } from "../useCases/modifyGame";
 import { removeGameUseCase } from "../useCases/removeGame";
+import { GameCollectionPresenter } from "../useCases/types/GameCollectionPresenter";
 import { GameCollectionPB } from "../data/gameCollectionPB";
+
 import { GameCollectionState } from "./gameCollectionState";
 
 const initialState: GameCollectionState = {
@@ -48,6 +51,12 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
     const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const gameCollectionPresenter: GameCollectionPresenter = {
+        present: (gameCollection: GameCollection) => {
+            setState({ collection: gameCollection });
+        }
+    }
+
     function describeError(error: any) {
         return error.message;
     }
@@ -76,11 +85,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
                 data: state.collection,
                 gameInfo: { title, description },
                 repo: gameCollectionPB,
-                presenter: {
-                    present: (gameCollection: GameCollection) => {
-                        setState({ collection: gameCollection });
-                    }
-                }
+                presenter: gameCollectionPresenter,
             });
         } catch (error) {
             setError(describeError(error));
@@ -102,11 +107,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
                 gameId: id,
                 gameInfo: { title, description },
                 repo: gameCollectionPB,
-                presenter: {
-                    present: (gameCollection: GameCollection) => {
-                        setState({ collection: gameCollection });
-                    }
-                }
+                presenter: gameCollectionPresenter,
             });
         } catch (error) {
             setError(describeError(error));
@@ -125,11 +126,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
                 data: state.collection,
                 gameId: id,
                 repo: gameCollectionPB,
-                presenter: {
-                    present: (gameCollection: GameCollection) => {
-                        setState({ collection: gameCollection });
-                    }
-                }
+                presenter: gameCollectionPresenter,
             });
         } catch (error) {
             setError(describeError(error));

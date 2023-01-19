@@ -1,8 +1,8 @@
 import { GameID } from "../domain/game";
-import { GameCollection, removeGameFromCollection } from "../domain/gameCollection";
-import { UseCaseProps } from "../../main/useCases/types/UseCaseProps";
+import { removeGameFromCollection } from "../domain/gameCollection";
+import { GameCollectionUseCase } from "./types/GameCollectionUseCase";
 
-export type RemoveGameProps = UseCaseProps & {
+export type RemoveGameProps = GameCollectionUseCase & {
     gameId: GameID,
 };
 
