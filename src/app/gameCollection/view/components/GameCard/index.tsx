@@ -1,6 +1,6 @@
 import { Button, Card } from 'react-bootstrap'
-import { GameInfo } from '../../domain/game'
-import styles from '../styles/GameCard.module.css';
+import { GameInfo } from '../../../domain/game'
+import styles from './styles.module.css';
 
 export interface GameCardProps {
     gameInfo: GameInfo;

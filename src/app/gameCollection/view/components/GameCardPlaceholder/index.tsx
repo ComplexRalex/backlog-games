@@ -1,5 +1,5 @@
-import { Button, Card, Placeholder } from 'react-bootstrap'
-import styles from '../styles/GameCard.module.css';
+import { Card, Placeholder } from 'react-bootstrap'
+import styles from '../GameCard/styles.module.css';
 
 const GameCardPlaceholder = (): JSX.Element => {
     return (

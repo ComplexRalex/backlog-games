@@ -1,43 +1,12 @@
-import React, { useState } from 'react'
-
-import { GameInfo } from '../../domain/game';
-
-import { useFormik } from 'formik';
-import { gameSchema } from '../../schemas/gameSchema';
-
 import { Button, Form, Modal } from 'react-bootstrap'
-
-export interface GameFormProps {
-    show: boolean;
-    isModify: boolean;
-    gameInfo?: GameInfo;
-    onSubmit(gameInfo: GameInfo): Promise<any>;
-    onHide?: (() => void);
-}
+import { GameFormProps } from './GameFormProps';
+import { useGameForm } from './useGameForm';
 
 const GameForm = (props: GameFormProps): JSX.Element => {
-    const [submitted, setSubmitted] = useState(false);
-    const formik = useFormik({
-        initialValues: {
-            title: props.gameInfo?.title || "",
-            description: props.gameInfo?.description || "",
-        },
-        validationSchema: gameSchema,
-        onSubmit: async (values) => {
-            try {
-                setSubmitted(true);
-                await props.onSubmit({
-                    title: values.title.trim(),
-                    description: values.description.trim(),
-                });
-            } catch (error) {
-                console.log(error);
-                console.log("wtf");
-            } finally {
-                setSubmitted(false);
-            }
-        }
-    });
+    const {
+        submitted,
+        formik,
+    } = useGameForm(props);
 
     return (
         <form>

@@ -1,30 +1,12 @@
-import React, { useState } from 'react'
-
-import { GameInfo } from '../../domain/game';
-
 import { Button, Modal } from 'react-bootstrap'
-
-export interface GameRemoveFormProps {
-    show: boolean;
-    gameInfo: GameInfo;
-    onAccept(): Promise<any>;
-    onHide?: (() => void);
-}
+import { GameRemoveFormProps } from './GameFormRemoveProps';
+import { useGameFormRemove } from './useGameFormRemove';
 
 const GameRemoveForm = (props: GameRemoveFormProps): JSX.Element => {
-    const [accepted, setAccepted] = useState(false);
-
-    const handleAccept = async () => {
-        try {
-            setAccepted(true);
-            await props.onAccept();
-        } catch (error) {
-            console.log(error);
-            console.log("wtf 2");
-        } finally {
-            setAccepted(false);
-        }
-    }
+    const {
+        accepted,
+        handleAccept,
+    } = useGameFormRemove(props);
 
     return (
         <Modal show={props.show} onHide={props.onHide} centered>
