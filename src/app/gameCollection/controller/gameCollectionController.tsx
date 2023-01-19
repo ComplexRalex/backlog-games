@@ -31,7 +31,7 @@ export interface GameCollectionProviderValue {
 
 const initialValue: GameCollectionProviderValue = {
     state: initialState,
-    isFirstLoading: false,
+    isFirstLoading: true,
     isLoading: false,
     error: undefined,
     loadCollection: async () => { },
@@ -45,7 +45,7 @@ export const GameCollectionContext = createContext(initialValue);
 export const GameCollectionProvider = ({ children }: any): JSX.Element => {
     const [state, setState] = useState<GameCollectionState>(initialState);
     const [error, setError] = useState<any>();
-    const [isFirstLoading, setIsFirstLoading] = useState<boolean>(false);
+    const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     function describeError(error: any) {

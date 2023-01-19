@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animate__animated animate__fadeIn`}>
       <Head>
         <title>Backlog Games</title>
         <meta name="description" content="Add your pending games here!" />

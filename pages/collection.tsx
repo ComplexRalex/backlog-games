@@ -14,6 +14,7 @@ import GameRemoveForm, { GameRemoveFormProps } from "../src/app/gameCollection/v
 import ErrorModal from "../src/app/main/view/components/ErrorModal";
 
 import styles from "../styles/Collection.module.css";
+import GameCardPlaceholder from "../src/app/gameCollection/view/components/GameCardPlaceHolder";
 
 type FormProps = Omit<GameFormProps, "onHide">
 type RemoveFormProps = Omit<GameRemoveFormProps, "onHide">
@@ -123,17 +124,24 @@ const Collection: NextPage = () => {
             </div>
             {
                 isFirstLoading
-                    ? <p>Loading...</p>
-                    : <GameGrid>
-                        {state.collection.games.map(game => (
-                            <GameCard
-                                key={game.id}
-                                gameInfo={game as GameInfo}
-                                onClickModify={async () => onClickModify(game)}
-                                onClickRemove={async () => onClickRemove(game)}
-                            />
-                        ))}
+                    ? <GameGrid>
+                        <GameCardPlaceholder />
+                        <GameCardPlaceholder />
+                        <GameCardPlaceholder />
+                        <GameCardPlaceholder />
                     </GameGrid>
+                    : state.collection.games.length > 0
+                        ? <GameGrid>
+                            {state.collection.games.map(game => (
+                                <GameCard
+                                    key={game.id}
+                                    gameInfo={game as GameInfo}
+                                    onClickModify={async () => onClickModify(game)}
+                                    onClickRemove={async () => onClickRemove(game)}
+                                />
+                            ))}
+                        </GameGrid>
+                        : <p>There are no games here!</p>
             }
 
             {
