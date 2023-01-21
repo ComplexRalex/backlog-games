@@ -12,6 +12,8 @@ To download and start using PocketBase, [click here!](https://pocketbase.io/)
 
 ## Disclaimer
 
+I did this project with NextJS 12. However, the implementation is not following the *best practices* of the framework. That's why I consider this as a "ReactJS project" instead.
+
 It's very possible that there are many and better implementations out there on the internet, so you should check them out.
 
 On the whole, this app is a combination of a bunch of ideas and implementations using clean architecture.
