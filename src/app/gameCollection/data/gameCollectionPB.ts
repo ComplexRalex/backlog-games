@@ -1,11 +1,15 @@
 import { GameInfo, Game, createGame, GameID } from "../domain/game";
 import { GameCollection } from "../domain/gameCollection";
 import { GameCollectionRepo } from "../domain/gameCollectionRepo";
-import httpClient from "../../main/request/httpClient";
+import HttpClient from "../../main/request/httpClient";
+
+const REST_API = process.env.NEXT_PUBLIC_PB_REST_API;
+
+const httpClientPB = new HttpClient(REST_API!);
 
 export class GameCollectionPB implements GameCollectionRepo {
     async load(): Promise<GameCollection> {
-        const resp = await httpClient.get(
+        const resp = await httpClientPB.get(
             "collections/games/records?sort=-updated&perPage=256",
         );
         const data = await resp.json();
@@ -17,7 +21,7 @@ export class GameCollectionPB implements GameCollectionRepo {
     }
 
     async createGame(gameInfo: GameInfo): Promise<Game> {
-        const resp = await httpClient.post(
+        const resp = await httpClientPB.post(
             "collections/games/records",
             gameInfo,
         );
@@ -30,7 +34,7 @@ export class GameCollectionPB implements GameCollectionRepo {
     }
 
     async modifyGame(id: GameID, gameInfo: GameInfo): Promise<Game> {
-        const resp = await httpClient.patch(
+        const resp = await httpClientPB.patch(
             `collections/games/records/${id}`,
             gameInfo,
         );
@@ -43,7 +47,7 @@ export class GameCollectionPB implements GameCollectionRepo {
     }
 
     async removeGame(id: GameID): Promise<void> {
-        const resp = await httpClient.delete(
+        const resp = await httpClientPB.delete(
             `collections/games/records/${id}`,
         );
     }
