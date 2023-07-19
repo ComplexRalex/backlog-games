@@ -15,7 +15,7 @@ const GameRemoveForm = (props: GameRemoveFormProps): JSX.Element => {
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Do you really want to remove "<i>{props.gameInfo.title}</i>"?
+                    Do you really want to remove &quot;<i>{props.gameInfo.title}</i>&quot;?
                 </p>
             </Modal.Body>
             <Modal.Footer>
