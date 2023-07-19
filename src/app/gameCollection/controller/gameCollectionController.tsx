@@ -1,19 +1,24 @@
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo, useCallback } from "react";
 
 import { createGameCollection, GameCollection } from "../domain/gameCollection";
 import { addGameUseCase } from "../useCases/addGame";
 import { modifyGameUseCase } from "../useCases/modifyGame";
 import { removeGameUseCase } from "../useCases/removeGame";
 import { GameCollectionPresenter } from "../useCases/types/GameCollectionPresenter";
-import { GameCollectionPB } from "../data/gameCollectionPB";
+
+// * This is a implementation for PocketBase
+// import { GameCollectionPB } from "../data/gameCollectionPB";
+// const gameCollectionRepo = new GameCollectionPB();
+
+// * This is a implementation for LocalStorage
+import { GameCollectionLS } from "../data/gameCollectionLS";
+const gameCollectionRepo = new GameCollectionLS();
 
 import { GameCollectionState } from "./gameCollectionState";
 
 const initialState: GameCollectionState = {
     collection: createGameCollection(),
 }
-
-const gameCollectionPB = new GameCollectionPB();
 
 export namespace GameCollectionProviderProps {
     export type AddGame = { title: string, description?: string };
@@ -51,30 +56,30 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
     const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const gameCollectionPresenter: GameCollectionPresenter = {
+    const gameCollectionPresenter: GameCollectionPresenter = useMemo(() => ({
         present: (gameCollection: GameCollection) => {
             setState({ collection: gameCollection });
         }
-    }
+    }), []);
 
     function describeError(error: any) {
         return error.message;
     }
 
-    const loadCollection = async () => {
+    const loadCollection = useCallback(async () => {
         try {
             setError(undefined);
             setIsFirstLoading(true);
-            const gameCollection = await gameCollectionPB.load();
+            const gameCollection = await gameCollectionRepo.load();
             setState({ collection: gameCollection });
         } catch (error) {
             setError(describeError(error));
         } finally {
             setIsFirstLoading(false);
         }
-    }
+    }, []);
 
-    const addGame = async ({
+    const addGame = useCallback(async ({
         title,
         description
     }: GameCollectionProviderProps.AddGame) => {
@@ -84,7 +89,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
             await addGameUseCase({
                 data: state.collection,
                 gameInfo: { title, description },
-                repo: gameCollectionPB,
+                repo: gameCollectionRepo,
                 presenter: gameCollectionPresenter,
             });
         } catch (error) {
@@ -92,9 +97,9 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
         } finally {
             setIsLoading(false);
         }
-    }
+    }, [state, gameCollectionPresenter]);
 
-    const modifyGame = async ({
+    const modifyGame = useCallback(async ({
         id,
         title,
         description
@@ -106,7 +111,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
                 data: state.collection,
                 gameId: id,
                 gameInfo: { title, description },
-                repo: gameCollectionPB,
+                repo: gameCollectionRepo,
                 presenter: gameCollectionPresenter,
             });
         } catch (error) {
@@ -114,9 +119,9 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
         } finally {
             setIsLoading(false);
         }
-    }
+    }, [state, gameCollectionPresenter]);
 
-    const removeGame = async ({
+    const removeGame = useCallback(async ({
         id
     }: GameCollectionProviderProps.RemoveGame) => {
         try {
@@ -125,7 +130,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
             await removeGameUseCase({
                 data: state.collection,
                 gameId: id,
-                repo: gameCollectionPB,
+                repo: gameCollectionRepo,
                 presenter: gameCollectionPresenter,
             });
         } catch (error) {
@@ -133,7 +138,7 @@ export const GameCollectionProvider = ({ children }: any): JSX.Element => {
         } finally {
             setIsLoading(false);
         }
-    }
+    }, [state, gameCollectionPresenter]);
 
     const values = useMemo<GameCollectionProviderValue>(() => ({
         state,
