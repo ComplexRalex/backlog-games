@@ -49,6 +49,10 @@ npm i
 npm run dev
 ```
 
+## Structure
+
+You can find the project structure in these files: `tree-en.txt` for *English*, and `tree-es.txt` for *Spanish*.
+
 ## Disclaimer
 
 I made this project with Next.js 12. However, the implementation doesn't actually use most of this framework's features. That's why I consider this as a "React.js project" instead.
