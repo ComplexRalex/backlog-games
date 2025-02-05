@@ -4,7 +4,17 @@ A very simple "Game CRUD" for your *backlogged* games.
 
 ![Backlog Games logo](/assets/backlog-games.png "Backlog Games logo")
 
-## How to?
+## Specs
+
+These are the versions of the technologies used in this project:
+
+| Tech     | Version |
+| -        | -       |
+| Node.js  | 18      |
+| React.js | 18      |
+| Next.js  | 12      |
+
+## How To?
 
 So you want to store games, right? Just click this repo's website and you can start! Better yet, [click here!](https://complexralex.github.io/backlog-games/)
 
@@ -52,6 +62,10 @@ npm run dev
 ## Structure
 
 You can find the project structure in these files: `tree-en.txt` for *English*, and `tree-es.txt` for *Spanish*.
+
+## GitHub Actions
+
+This project uses GitHub Actions for build and deployment. You can find the workflow in `.github/workflows/nextjs.yml`, which was based on this example: https://github.com/actions/starter-workflows/blob/main/pages/nextjs.yml.
 
 ## Disclaimer
 
