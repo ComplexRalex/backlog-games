@@ -67,6 +67,12 @@ You can find the project structure in these files: `tree-en.txt` for *English*, 
 
 This project uses GitHub Actions for build and deployment. You can find the workflow in `.github/workflows/nextjs.yml`, which was based on this example: https://github.com/actions/starter-workflows/blob/main/pages/nextjs.yml.
 
+## PWA
+
+This project has some PWA capabilities (it has a `manifest.json`). Just note that **there's no service worker at the moment**.
+
+> TODO: Implement a service worker.
+
 ## Disclaimer
 
 I made this project with Next.js 12. However, the implementation doesn't actually use most of this framework's features. That's why I consider this as a "React.js project" instead.
