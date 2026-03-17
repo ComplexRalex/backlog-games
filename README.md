@@ -69,9 +69,7 @@ This project uses GitHub Actions for build and deployment. You can find the work
 
 ## PWA
 
-This project has some PWA capabilities (it has a `manifest.json`). Just note that **there's no service worker at the moment**.
-
-> TODO: Implement a service worker.
+This web application has PWA capabilities (it includes a `manifest.json` and a **service worker**). You can install it as a standalone and use it offline!
 
 ## Disclaimer
 
