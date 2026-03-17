@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   basePath: '/backlog-games',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },

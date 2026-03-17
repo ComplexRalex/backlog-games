@@ -1,4 +1,4 @@
-const CACHE_NAME = 'backlog-games-sw-v1.1.0';
+const CACHE_NAME = 'backlog-games-sw-v1.1.1';
 
 const ASSETS_TO_CACHE = [
   '/backlog-games/favicon.ico',
